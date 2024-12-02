@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./provider/AuthProvider";
 import { GlobalStyles } from "./styles/GlobalStyles";
+import WelcomePage from "./pages/WelcomePage";
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<div>Olá</div>} />
+          <Route path="/" element={<WelcomePage />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
