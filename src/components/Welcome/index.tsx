@@ -11,7 +11,7 @@ const Welcome = () => {
     <Container>
       <Title
         title={isAuthenticated ? `Welcome, ${user?.name}` : "Welcome!"}
-        subtitle="This is a simple space to find the NYT Best Sellers on your favorite category."
+        subtitle="This is a simple space to find the NYT Best Sellers on your favorite category"
       />
       {isAuthenticated ? <BestSellersListNames /> : <LoginForm />}
     </Container>

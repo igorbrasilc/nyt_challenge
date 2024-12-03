@@ -14,6 +14,7 @@ export const useBestSellers = (listName: string) => {
         setBooks(data.results);
         setCopyright(data.copyright);
       } catch (err) {
+        alert("An error occurred while fetching the best sellers");
         setError(err instanceof Error ? err : new Error("An error occurred"));
       } finally {
         setLoading(false);

@@ -37,7 +37,7 @@ export const getNYTBestSellerLists = async (): Promise<BookList[]> => {
     return data.results;
   } catch (error) {
     console.error("Error fetching book lists:", error);
-    throw error;
+    throw new Error("An error occurred while fetching the book lists");
   }
 };
 
@@ -55,6 +55,6 @@ export const getBestSellers = async (
     };
   } catch (error) {
     console.error("Error fetching bestsellers:", error);
-    throw error;
+    throw new Error("An error occurred while fetching the best sellers");
   }
 };
