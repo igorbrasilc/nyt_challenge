@@ -1,30 +1,15 @@
 import { useParams } from "react-router-dom";
 import { useBestSellers } from "../hooks/useBestSellers";
+import Loading from "../components/shared/Loading";
 import BestSellers from "../components/BestSellers";
-import { CircularProgress } from "@mui/material";
-import styled from "styled-components";
 
 const BestSellersPage = () => {
   const { category } = useParams();
   const { books, copyright, loading, error } = useBestSellers(category ?? "");
 
-  if (loading) {
-    return (
-      <LoadingContainer>
-        <CircularProgress size={60} />
-      </LoadingContainer>
-    );
-  }
-  if (error) return <div>{error.message}</div>;
+  if (loading) return <Loading />;
 
-  return <BestSellers books={books} copyright={copyright} />;
+  return <BestSellers books={books} error={error} copyright={copyright} />;
 };
 
 export default BestSellersPage;
-
-const LoadingContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-`;
