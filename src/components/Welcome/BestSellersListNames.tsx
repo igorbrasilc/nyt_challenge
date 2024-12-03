@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import styled from "styled-components";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
-import { CircularProgress } from "@mui/material";
 import { fadeIn } from "../../styles/StyleUtils";
 import { useBookLists } from "../../hooks/useBookLists";
 import { useNavigate } from "react-router-dom";
@@ -11,59 +10,51 @@ export const BestSellersListNames = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { lists, loading, error } = useBookLists();
 
-  const handleSearchClick = () => {
+  const handleSearchClick = useCallback(() => {
     if (lists[currentIndex]) {
       navigate(`/best-sellers/${lists[currentIndex].list_name_encoded}`);
     }
-  };
+  }, [lists, currentIndex, navigate]);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % lists.length);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + lists.length) % lists.length);
+    setCurrentIndex((prev) => (prev - 1 + lists.length) % lists?.length);
   };
 
   if (error) return <ErrorMessage>Failed to load book lists</ErrorMessage>;
-  if (!lists.length) return null;
+  if (!lists?.length) return null;
 
   return (
-    <Container>
-      <CarouselContainer loading={loading}>
-        {loading ? (
-          <LoadingContainer>
-            <CircularProgress size={40} />
-          </LoadingContainer>
-        ) : (
-          <>
-            <CarouselButton onClick={prevSlide}>
-              <ChevronLeft fontSize="large" />
-            </CarouselButton>
+    <Container $loading={loading}>
+      <CarouselContainer>
+        <CarouselButton onClick={prevSlide}>
+          <ChevronLeft fontSize="large" />
+        </CarouselButton>
 
-            <ContentContainer>
-              <ListName>{lists[currentIndex].display_name}</ListName>
-              <UpdateFrequency>
-                Updated {lists[currentIndex].updated.toLowerCase()}
-              </UpdateFrequency>
-            </ContentContainer>
+        <ContentContainer>
+          <ListName>{lists[currentIndex].display_name}</ListName>
+          <UpdateFrequency>
+            Updated {lists[currentIndex].updated.toLowerCase()}
+          </UpdateFrequency>
+        </ContentContainer>
 
-            <CarouselButton onClick={nextSlide}>
-              <ChevronRight fontSize="large" />
-            </CarouselButton>
-          </>
-        )}
+        <CarouselButton onClick={nextSlide}>
+          <ChevronRight fontSize="large" />
+        </CarouselButton>
       </CarouselContainer>
 
       <SearchButton onClick={handleSearchClick} disabled={loading}>
-        Search NYT Best Sellers on That Category
+        Search NYT Best Sellers
       </SearchButton>
     </Container>
   );
 };
 
-const Container = styled.div`
-  display: flex;
+const Container = styled.div<{ $loading: boolean }>`
+  display: ${({ $loading: isloading }) => (isloading ? "none" : "flex")};
   flex-direction: column;
   align-items: center;
   gap: 2rem;
@@ -93,14 +84,14 @@ const SearchButton = styled.button`
   }
 `;
 
-const CarouselContainer = styled.div<{ loading: boolean }>`
+const CarouselContainer = styled.div`
   margin-top: 2rem;
   ${fadeIn}
   animation: fadeIn 1.2s ease forwards;
   opacity: 0;
   animation-delay: 2.5s;
 
-  display: ${({ loading }) => (loading ? "none" : "flex")};
+  display: flex;
   align-items: center;
   gap: 1rem;
   padding: 1rem;
@@ -139,14 +130,6 @@ const CarouselButton = styled.button`
   &:hover {
     opacity: 1;
   }
-`;
-
-const LoadingContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 300px;
-  padding: 2rem;
 `;
 
 const ErrorMessage = styled.div`

@@ -1,7 +1,7 @@
 import { useAuth } from "../../hooks/useAuth";
 import { Container } from "../../styles/BodyContainer";
 import { LoginForm } from "./LoginForm";
-import { Title } from "./Title";
+import { Title } from "../shared/Title";
 import { BestSellersListNames } from "./BestSellersListNames";
 
 const Welcome = () => {
