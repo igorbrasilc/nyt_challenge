@@ -1,28 +1,23 @@
-import { useState, useEffect } from "react";
-import { BestSellerBook, getBestSellers } from "../services/nytimes";
+import { useQuery } from "@tanstack/react-query";
+import { getBestSellers } from "../services/nytimes";
 
 export const useBestSellers = (listName: string) => {
-  const [books, setBooks] = useState<BestSellerBook[]>([]);
-  const [copyright, setCopyright] = useState<string>("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
+  const {
+    data,
+    isLoading: loading,
+    error,
+  } = useQuery({
+    queryKey: ["bestsellers", listName],
+    queryFn: () => getBestSellers(listName),
+    staleTime: 5 * 60 * 1000,
+    gcTime: 30 * 60 * 1000,
+    retry: 2,
+  });
 
-  useEffect(() => {
-    const fetchBestSellers = async () => {
-      try {
-        const data = await getBestSellers(listName);
-        setBooks(data.results);
-        setCopyright(data.copyright);
-      } catch (err) {
-        alert("An error occurred while fetching the best sellers");
-        setError(err instanceof Error ? err : new Error("An error occurred"));
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchBestSellers();
-  }, [listName]);
-
-  return { books, copyright, loading, error };
+  return {
+    books: data?.results ?? [],
+    copyright: data?.copyright ?? "",
+    loading,
+    error: error as Error | null,
+  };
 };

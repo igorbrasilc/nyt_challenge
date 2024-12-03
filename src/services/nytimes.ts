@@ -44,17 +44,17 @@ export const getNYTBestSellerLists = async (): Promise<BookList[]> => {
 export const getBestSellers = async (
   listName: string
 ): Promise<NYTResponse> => {
-  try {
-    const response = await fetch(
-      `${BASE_URL}/lists.json?list=${listName}&api-key=${API_KEY}`
-    );
-    const data = await response.json();
-    return {
-      results: data.results,
-      copyright: data.copyright,
-    };
-  } catch (error) {
-    console.error("Error fetching bestsellers:", error);
-    throw new Error("An error occurred while fetching the best sellers");
+  const response = await fetch(
+    `${BASE_URL}/lists.json?list=${listName}&api-key=${API_KEY}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch bestsellers");
   }
+
+  const data = await response.json();
+  return {
+    results: data.results,
+    copyright: data.copyright,
+  };
 };
