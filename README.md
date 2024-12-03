@@ -45,4 +45,4 @@ VITE_NYT_API_KEY=AXZGAH6zEia92Zq0NYyDGj8MZSrAnu3Q
 yarn dev
 ```
 
-By default, the app will run on http://localhost:5173
+By default, the app will run on `http://localhost:5173/`
