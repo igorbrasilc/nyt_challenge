@@ -2,6 +2,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { Container } from "../../styles/BodyContainer";
 import { LoginForm } from "./LoginForm";
 import { Title } from "./Title";
+import { BestSellersListNames } from "./BestSellersListNames";
 
 const Welcome = () => {
   const { user, isAuthenticated } = useAuth();
@@ -10,9 +11,9 @@ const Welcome = () => {
     <Container>
       <Title
         title={isAuthenticated ? `Welcome, ${user?.name}` : "Welcome!"}
-        subtitle="This is a simple space to find your favorite books."
+        subtitle="This is a simple space to find the NYT Best Sellers on your favorite category."
       />
-      {isAuthenticated ? <div>Olá</div> : <LoginForm />}
+      {isAuthenticated ? <BestSellersListNames /> : <LoginForm />}
     </Container>
   );
 };
