@@ -17,7 +17,9 @@ const BooksList = ({ books }: BooksListProps) => {
           <BookAuthor>by {book.book_details[0].author}</BookAuthor>
           <BookDescription>{book.book_details[0].description}</BookDescription>
           <BookInfo>Weeks on list: {book.weeks_on_list}</BookInfo>
-          <BuyButton onClick={() => {}}>Buy on Amazon</BuyButton>
+          <BuyButton as="a" href={book.amazon_product_url} target="_blank">
+            Buy on Amazon
+          </BuyButton>
         </BookCard>
       ))}
     </BooksGrid>

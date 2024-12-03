@@ -1,6 +1,8 @@
 # NYT Challenge
 
-It is a simple app that allows you to search for articles from the [New York Times Books API](https://developer.nytimes.com/docs/books-product/1/overview).
+It is a simple app that allows you to search for books from the [New York Times Books API](https://developer.nytimes.com/docs/books-product/1/overview).
+
+The user accesses the app through a welcome page, where they can select a category to view the bestsellers for that category. Then they look at the list of books with details and can go to the Amazon product page for each book.
 
 ## Tech Stack
 
@@ -9,6 +11,7 @@ It is a simple app that allows you to search for articles from the [New York Tim
 - Vite (build tool)
 - React Router
 - styled-components
+- Tanstack React Query for caching
 
 ## Requirements
 

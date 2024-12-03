@@ -20,6 +20,7 @@ export interface BestSellerBook {
   rank: number;
   weeks_on_list: number;
   amazon_product_url: string;
+  published_date: string;
   book_details: BookDetail[];
 }
 
