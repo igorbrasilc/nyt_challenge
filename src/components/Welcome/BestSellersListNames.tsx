@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { fadeIn } from "../../styles/StyleUtils";
 import { useBookLists } from "../../hooks/useBookLists";
 import { useNavigate } from "react-router-dom";
+import { StyledButton } from "../shared/StyledButton";
 
 export const BestSellersListNames = () => {
   const navigate = useNavigate();
@@ -46,9 +47,9 @@ export const BestSellersListNames = () => {
         </CarouselButton>
       </CarouselContainer>
 
-      <SearchButton onClick={handleSearchClick} disabled={loading}>
+      <StyledButton onClick={handleSearchClick} disabled={loading}>
         Search NYT Best Sellers
-      </SearchButton>
+      </StyledButton>
     </Container>
   );
 };
@@ -58,30 +59,6 @@ const Container = styled.div<{ $loading: boolean }>`
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-`;
-
-const SearchButton = styled.button`
-  ${fadeIn}
-  animation: fadeIn 1.2s ease forwards;
-  opacity: 0;
-  animation-delay: 3s;
-
-  padding: 0.8rem 1.5rem;
-  border: 1px solid currentColor;
-  background: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
 `;
 
 const CarouselContainer = styled.div`
