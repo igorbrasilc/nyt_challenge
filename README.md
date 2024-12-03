@@ -4,6 +4,8 @@ It is a simple app that allows you to search for books from the [New York Times 
 
 The user accesses the app through a welcome page, where they can select a category to view the bestsellers for that category. Then they look at the list of books with details and can go to the Amazon product page for each book.
 
+![Screencastfrom03-12-2024001417-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/6eeb0755-c839-4d49-a1f5-274dd1f9cf4d)
+
 ## Tech Stack
 
 - React
